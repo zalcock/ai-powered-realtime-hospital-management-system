@@ -3,19 +3,23 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "watch": "bun --watch index.ts",
+    "watch": "bun --watch src/server.ts",
+    "start": "bun run src/server.ts",
     "start:ngrok": "ngrok http 5000",
     "start:inngest": "npx inngest-cli@latest dev",
     "start:server": "nodemon --exec bun run src/server.ts",
-    "dev": "concurrently -c \"blue,magenta,cyan\" -n \"SERVER,NGROK,INNGEST\" \"bun run start:server\" \"bun run start:ngrok\" \"npm run start:inngest\""
+    "dev": "concurrently -c \"blue,magenta,cyan\" -n \"SERVER,NGROK,INNGEST\" \"bun run start:server\" \"bun run start:ngrok\" \"npm run start:inngest\"",
+    "seed": "bun run scripts/seed.ts",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/bun": "latest",
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.14"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "@better-auth/mongo-adapter": "^1.5.3",
@@ -26,6 +30,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
+    "bcrypt": "^6.0.0",
     "better-auth": "^1.5.5",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -36,6 +41,7 @@
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.4",
     "morgan": "^1.10.1",
+    "orgo-vnc": "^0.2.20",
     "socket.io": "^4.8.3",
     "uploadthing": "^7.7.4"
   }

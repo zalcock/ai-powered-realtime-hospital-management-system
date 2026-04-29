@@ -1,0 +1,119 @@
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"GEMINI_KEY\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"POLAR_ACCESS_TOKEN\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"POLAR_WEBHOOK_SECRET\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"UPLOADTHING_TOKEN\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"POLAR_PRODUCT_ID\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="The \"BETTER_AUTH_SECRET\" variable is not set. Defaulting to a blank string."
+time="2026-04-24T10:38:02+02:00" level=warning msg="C:\\Users\\PEP_Admin\\openclaw-projects\\realtime-hospital-Management\\ai-powered-realtime-hospital-management-system\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image ai-powered-realtime-hospital-management-system-backend Building 
+ Image ai-powered-realtime-hospital-management-system-frontend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.49kB 0.0s done
+#1 DONE 0.0s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile:
+#2 transferring dockerfile: 959B 0.3s done
+#2 DONE 0.5s
+
+#3 [backend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 940B 0.3s done
+#3 DONE 0.4s
+
+#4 [backend internal] load metadata for docker.io/oven/bun:1
+#4 ...
+
+#5 [auth] oven/bun:pull token for registry-1.docker.io
+#5 DONE 0.0s
+
+#4 [frontend internal] load metadata for docker.io/oven/bun:1
+#4 DONE 7.4s
+
+#6 [backend internal] load .dockerignore
+#6 transferring context:
+#6 transferring context: 2B 0.1s done
+#6 DONE 0.8s
+
+#7 [frontend internal] load .dockerignore
+#7 transferring context: 85B 0.1s done
+#7 DONE 0.9s
+
+#8 [frontend internal] load build context
+#8 DONE 0.0s
+
+#9 [backend internal] load build context
+#9 DONE 0.0s
+
+#10 [backend builder 1/5] FROM docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e
+#10 resolve docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e
+#10 resolve docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e 0.2s done
+#10 resolve docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e 0.2s done
+#10 DONE 4.0s
+
+#9 [backend internal] load build context
+#9 transferring context: 235.27kB 3.5s
+#9 ...
+
+#8 [frontend internal] load build context
+#8 transferring context: 645.71kB 4.5s done
+#8 DONE 5.2s
+
+#9 [backend internal] load build context
+#9 ...
+
+#10 [frontend builder 1/5] FROM docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e
+#10 sha256:3d46424f016660c963f2436f10337209f5b80a9444c9b839ba874c627e482d7b 0B / 39.94MB 0.9s
+#10 sha256:d0826a5f7ef4c217928112a6da2c38eebe143508df148f719971cec8916e7d2f 0B / 3.40kB 0.5s
+#10 sha256:959552c2c430f9e81630bf5ef35f3567e59fcdd0d429271376bd53c5640b47e5 0B / 185B 0.2s
+#10 ...
+
+#11 [frontend production-dependencies-env 2/4] COPY ./package.json bun.lockb /app/
+#11 CANCELED
+
+#12 [frontend development-dependencies-env 2/4] COPY . /app
+#12 CANCELED
+
+#13 [frontend build-env 2/5] COPY . /app/
+#13 CANCELED
+
+#10 [frontend builder 1/5] FROM docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e
+#10 sha256:5b531c0f03faa601b21ffba074576367135fd009dc1659ac7eed7be40c0d98b7 0B / 138B 0.3s
+#10 sha256:959552c2c430f9e81630bf5ef35f3567e59fcdd0d429271376bd53c5640b47e5 185B / 185B 2.0s
+#10 sha256:d0826a5f7ef4c217928112a6da2c38eebe143508df148f719971cec8916e7d2f 3.40kB / 3.40kB 2.4s
+#10 sha256:5b531c0f03faa601b21ffba074576367135fd009dc1659ac7eed7be40c0d98b7 138B / 138B 1.5s
+#10 sha256:959552c2c430f9e81630bf5ef35f3567e59fcdd0d429271376bd53c5640b47e5 185B / 185B 2.1s done
+#10 sha256:d0826a5f7ef4c217928112a6da2c38eebe143508df148f719971cec8916e7d2f 3.40kB / 3.40kB 2.6s done
+#10 sha256:5b531c0f03faa601b21ffba074576367135fd009dc1659ac7eed7be40c0d98b7 138B / 138B 1.8s done
+#10 sha256:a7730063fcfe708b222d34c4f07d633dfe087a28c05c4daaab2fa9943854c155 0B / 49.30MB 0.2s
+#10 sha256:f255ba90d9deba7052e81e2afb76bbd781e8fedade86b8163fb3c1d1d175e135 0B / 294B 0.2s
+#10 sha256:f255ba90d9deba7052e81e2afb76bbd781e8fedade86b8163fb3c1d1d175e135 294B / 294B 0.6s
+#10 sha256:f255ba90d9deba7052e81e2afb76bbd781e8fedade86b8163fb3c1d1d175e135 294B / 294B 1.0s done
+#10 sha256:3d46424f016660c963f2436f10337209f5b80a9444c9b839ba874c627e482d7b 0B / 39.94MB 6.0s
+#10 ...
+
+#14 [backend builder 2/5] WORKDIR /app
+#14 CANCELED
+
+#9 [backend internal] load build context
+#9 transferring context: 644.91kB 10.1s done
+#9 CANCELED
+
+#10 [backend builder 1/5] FROM docker.io/oven/bun:1@sha256:87416c977a612a204eb54ab9f3927023c2a3c971f4f345a01da08ea6262ae30e
+Dockerfile:8
+
+--------------------
+
+   6 |     
+
+   7 |     FROM oven/bun:1 AS production-dependencies-env
+
+   8 | >>> COPY ./package.json bun.lockb /app/
+
+   9 |     WORKDIR /app
+
+  10 |     RUN bun install --production --frozen-lockfile
+
+--------------------
+
+target frontend: failed to solve: failed to compute cache key: failed to calculate checksum of ref mvdsh34pjj9itpoy1jx6sve58::0ptpkxpcff0iah5jwzjzltdv7: "/bun.lockb": not found
+

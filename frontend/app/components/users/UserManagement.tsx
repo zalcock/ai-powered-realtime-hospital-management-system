@@ -1,7 +1,7 @@
 import { authClient } from "@/lib/auth-client";
 import type { Role, User, UserStatus } from "@/types";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createActityLog, getUsers } from "@/lib/api";
 import Loader from "@/components/global/Loader";
 import {

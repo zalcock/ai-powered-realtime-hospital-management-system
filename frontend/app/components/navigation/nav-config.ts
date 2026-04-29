@@ -65,7 +65,7 @@ export const navConfig: {
     },
     {
       title: "Nursing Station",
-      url: "/nursing",
+      url: "/nurses",
       icon: ClipboardPlus,
       allowedRoles: ["admin"], // 👈 Nurse specific
       items: [{ title: "Nurses", url: "/nurses" }],
@@ -100,7 +100,7 @@ export const navConfig: {
     },
     {
       title: "Financial Records",
-      url: "/records",
+      url: "/financial-history",
       icon: ReceiptCent,
       allowedRoles: ["admin", "doctor"],
       items: [{ title: "History", url: "/financial-history" }],

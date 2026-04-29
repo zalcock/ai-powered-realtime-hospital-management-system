@@ -1,22 +1,40 @@
-FROM node:20-alpine AS development-dependencies-env
+# Frontend Dockerfile for React Router v7 with SSR
+FROM oven/bun:1 AS development-dependencies-env
 COPY . /app
 WORKDIR /app
-RUN npm ci
+RUN bun install --frozen-lockfile
 
-FROM node:20-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
+FROM oven/bun:1 AS production-dependencies-env
+COPY ./package.json bun.lock /app/
 WORKDIR /app
-RUN npm ci --omit=dev
+RUN bun install --production --frozen-lockfile
 
-FROM node:20-alpine AS build-env
+FROM oven/bun:1 AS build-env
 COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
+COPY --from=development-dependencies-env /app/node_modules ./node_modules
 WORKDIR /app
-RUN npm run build
+RUN bun run build
 
-FROM node:20-alpine
-COPY ./package.json package-lock.json /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
-COPY --from=build-env /app/build /app/build
+FROM oven/bun:1 AS runner
 WORKDIR /app
-CMD ["npm", "run", "start"]
+
+ENV NODE_ENV=production
+ENV PORT=5173
+ENV HOSTNAME="0.0.0.0"
+
+# Create non-root user (Alpine)
+RUN addgroup -g 1001 nodejs 2>/dev/null || getent group nodejs > /dev/null || (mkdir -p /app && true)
+RUN adduser -u 1001 -G nodejs -D nodejs 2>/dev/null || getent passwd nodejs > /dev/null || true
+
+COPY --from=production-dependencies-env /app/node_modules ./node_modules
+COPY --from=build-env /app/build ./build
+COPY --from=build-env /app/package.json ./package.json
+
+# Set permissions
+RUN chown -R nodejs:nodejs /app
+
+USER nodejs
+
+EXPOSE 5173
+
+CMD ["bun", "run", "start"]

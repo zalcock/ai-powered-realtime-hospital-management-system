@@ -3,6 +3,7 @@ import express, {
   type Application,
   type Request,
   type Response,
+  type NextFunction,
 } from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -35,6 +36,7 @@ dotenv.config();
 
 // Initialize Express application
 const app: Application = express();
+export { app };
 const PORT = process.env.PORT || 5000;
 const httpServer = createServer(app);
 
@@ -98,13 +100,23 @@ app.use(
 app.use("/api/uploadthing", createRouteHandler({ router: uploadRouter }));
 app.use("/api/uploadthing/delete", uploadthingRouter);
 
+// 404 handler for unmatched routes (must be after all routes)
+app.use((_req: Request, res: Response, _next: NextFunction) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
+});
+
 // --- Global Error Handler ---
-app.use((err: any, req: Request, res: Response, next: any) => {
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error("Unhandled error:", err);
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode);
   res.json({
-    message: err.message,
-    stack: process.env.NODE_ENV === "production" ? null : err.stack,
+    success: false,
+    message: err.message || "Internal server error",
+    stack: process.env.NODE_ENV === "production" ? undefined : err.stack,
   });
 });
 
@@ -113,12 +125,13 @@ connectDB()
   .then(() => {
     httpServer.listen(PORT, () => {
       console.log(
-        `🚀 Server + Socket.IO running in ${process.env.NODE_ENV} mode on port ${PORT}`,
+        `🚀 Server + Socket.IO running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`,
       );
     });
   })
   .catch((error) => {
     console.error(
-      `Failed to connect to the database: ${(error as Error).message}`,
+      `❌ Failed to connect to the database: ${(error as Error).message}`,
     );
+    process.exit(1);
   });
