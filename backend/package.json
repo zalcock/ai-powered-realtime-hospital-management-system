@@ -34,7 +34,7 @@
     "better-auth": "^1.5.5",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
+    "dotenv": "^16.4.5",
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "inngest": "^3.52.6",

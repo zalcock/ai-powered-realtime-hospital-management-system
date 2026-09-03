@@ -11,8 +11,10 @@ import {
 } from "@polar-sh/better-auth";
 import { Polar } from "@polar-sh/sdk";
 import invoice from "../models/invoice";
+import dotenv from "dotenv";
+dotenv.config();
 
-const client = new MongoClient(process.env.MONGO_URI || "");
+const client = new MongoClient(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/hospital");
 const db = client.db();
 
 export const polarClient = new Polar({
@@ -42,9 +44,9 @@ export const auth = betterAuth({
         checkout({
           authenticatedUsersOnly: true,
         }),
-        portal({
-          returnUrl: `${process.env.FRONTEND_URL}/dashboard`,
-        }),
+portal({
+  returnUrl: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/dashboard`,
+}),
         usage(),
         webhooks({
           secret: process.env.POLAR_WEBHOOK_SECRET!,

@@ -1,19 +1,9 @@
-- [ ] Analyze project structure and dependencies
-- [ ] Identify missing or outdated environment variables
-- [ ] Run linting and type‑checking (`npm run typecheck`)
-- [ ] Execute unit and integration tests (`npm test` or equivalent)
-- [ ] Review and fix any failing tests or lint errors
-- [ ] Verify database connection and seed scripts
-- [ ] Ensure API routes are correctly protected and documented
-- [ ] Validate CORS and security middleware configuration
-- [ ] Test socket.io integration and real‑time features
-- [ ] Confirm uploadthing and Gemini key handling
-- [ ] Build and test the frontend (`npm run build` or `vite build`)
-- [ ] Run end‑to‑end tests (if available)
-- [ ] Perform a production build and run the server in production mode
-- [ ] Check Dockerfiles and docker‑compose for correctness
-- [ ] Update `PRODUCTION_READY.md` with final checklist
-- [ ] Commit all changes and push to the repository
-- [ ] Deploy to the target environment (e.g., Docker, Kubernetes)
-- [ ] Verify the deployed system is fully functional and secure
-- [ ] Document any remaining manual steps or environment requirements
+- [x] Push to GitHub
+
+- [ ] Start MongoDB (Docker or local)
+- [ ] Start backend server (`bun run src/server.ts`)
+- [ ] Start frontend dev server (`bun run dev`)
+- [ ] Verify backend endpoint (`curl http://localhost:5000/`)
+- [ ] Verify frontend page (`http://localhost:5173/`)
+- [ ] Run backend unit tests (`bun test`)
+- [ ] Run E2E tests (Playwright)
