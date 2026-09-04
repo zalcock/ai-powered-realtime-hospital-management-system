@@ -46,37 +46,44 @@ export const auth = betterAuth({
       // but we are going to work without it since will have a middleware to check permissions based on the role in the session
       adminRole: ["admin", "superadmin"],
     }),
-    polar({
-      client: polarClient,
-      createCustomerOnSignUp: true,
-      use: [
-        checkout({
-          authenticatedUsersOnly: true,
-        }),
-portal({
-  returnUrl: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/dashboard`,
-}),
-        usage(),
-        webhooks({
-          secret: process.env.POLAR_WEBHOOK_SECRET!,
-          onPayload: async ({ data, type }) => {
-            // console.log("Received Polar webhook:", type, data);
-            if (type === "order.paid" && data.paid) {
-              const invoiceId = data.metadata?.hospitalInvoiceId;
-              if (invoiceId) {
-                // Update your Mongo DB!
-                await invoice.findByIdAndUpdate(invoiceId, {
-                  status: "paid",
-                });
-                console.log(
-                  `✅ Invoice ${invoiceId} marked as PAID via Polar!`,
-                );
-              }
-            }
-          },
-        }),
-      ],
-    }),
+    // Polar (billing) is optional. Without a real POLAR_ACCESS_TOKEN, calling its API on every
+    // signup would throw a 401 and break account creation entirely — so only wire it up when
+    // credentials are actually configured.
+    ...(process.env.POLAR_ACCESS_TOKEN
+      ? [
+          polar({
+            client: polarClient,
+            createCustomerOnSignUp: true,
+            use: [
+              checkout({
+                authenticatedUsersOnly: true,
+              }),
+              portal({
+                returnUrl: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/dashboard`,
+              }),
+              usage(),
+              webhooks({
+                secret: process.env.POLAR_WEBHOOK_SECRET!,
+                onPayload: async ({ data, type }) => {
+                  // console.log("Received Polar webhook:", type, data);
+                  if (type === "order.paid" && data.paid) {
+                    const invoiceId = data.metadata?.hospitalInvoiceId;
+                    if (invoiceId) {
+                      // Update your Mongo DB!
+                      await invoice.findByIdAndUpdate(invoiceId, {
+                        status: "paid",
+                      });
+                      console.log(
+                        `✅ Invoice ${invoiceId} marked as PAID via Polar!`,
+                      );
+                    }
+                  }
+                },
+              }),
+            ],
+          }),
+        ]
+      : []),
   ],
   user: {
     additionalFields: {
