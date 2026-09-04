@@ -108,10 +108,17 @@ app.get("/api/dev/seed", async (req: Request, res: Response) => {
     return res.status(403).json({ success: false, message: "forbidden" });
   }
   if (req.query.diag === "1") {
+    let pluginIds: string[] = [];
+    try {
+      pluginIds = ((auth as any).options?.plugins || []).map((p: any) => p.id);
+    } catch (e: any) {
+      pluginIds = [`error: ${e?.message || e}`];
+    }
     return res.json({
       polarAccessTokenSet: !!process.env.POLAR_ACCESS_TOKEN,
       polarAccessTokenLen: (process.env.POLAR_ACCESS_TOKEN || "").length,
-      commit: "f5adfe7-diag",
+      pluginIds,
+      commit: "77d626b-diag2",
     });
   }
   const SEED_USERS = [
