@@ -107,6 +107,13 @@ app.get("/api/dev/seed", async (req: Request, res: Response) => {
   if (!process.env.SEED_TOKEN || req.query.token !== process.env.SEED_TOKEN) {
     return res.status(403).json({ success: false, message: "forbidden" });
   }
+  if (req.query.diag === "1") {
+    return res.json({
+      polarAccessTokenSet: !!process.env.POLAR_ACCESS_TOKEN,
+      polarAccessTokenLen: (process.env.POLAR_ACCESS_TOKEN || "").length,
+      commit: "f5adfe7-diag",
+    });
+  }
   const SEED_USERS = [
     { name: "Dr. John Smith", email: "admin@medflow.com", password: "Admin@123", role: "admin", department: "Administration", gender: "Male", bloodgroup: "O+", age: "45", status: "active" },
     { name: "Dr. SarahJohnson", email: "doctor@medflow.com", password: "Doctor@123", role: "doctor", department: "Cardiology", specialization: "Cardiologist", gender: "Female", bloodgroup: "A+", age: "38", status: "active" },
