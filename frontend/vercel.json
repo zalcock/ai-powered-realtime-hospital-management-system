@@ -5,8 +5,8 @@
   "outputDirectory": "build/client",
   "build": {
     "env": {
-      "VITE_API_URL": "https://medflow-backend-zcm0.onrender.com",
-      "VITE_SOCKET_URL": "https://medflow-backend-zcm0.onrender.com"
+      "VITE_API_URL": "https://medflow-backend-api.onrender.com",
+      "VITE_SOCKET_URL": "https://medflow-backend-api.onrender.com"
     }
   },
   "rewrites": [
