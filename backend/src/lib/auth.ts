@@ -31,6 +31,15 @@ export const auth = betterAuth({
   // if you comment this out, thunder client will be able to create user, but let add origin on thunder client to test it out
   trustedOrigins: [process.env.FRONTEND_URL || "http://localhost:5173"],
   emailAndPassword: { enabled: true },
+  // Frontend and backend live on different domains (e.g. vercel.app vs onrender.com),
+  // so session cookies need SameSite=None to be sent on cross-origin requests.
+  // In local dev (http://localhost) this falls back to Lax since Secure cookies require HTTPS.
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      secure: process.env.NODE_ENV === "production",
+    },
+  },
   plugins: [
     admin({
       defaultRole: "patient",
